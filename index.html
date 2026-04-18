@@ -8,81 +8,209 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        :root { --primary: #4f46e5; --bg: #f8fafc; --card-bg: #ffffff; --text: #1e293b; --accent: #f59e0b; }
-        .dark-mode { --bg: #0f172a; --card-bg: #1e293b; --text: #f1f5f9; --primary: #818cf8; }
+        /* COLOR PALETTE & THEMING */
+        :root { 
+            --primary: #4f46e5; 
+            --bg: #f8fafc; 
+            --card-bg: #ffffff; 
+            --text: #1e293b; 
+            --accent: #f59e0b; 
+        }
+        .dark-mode { 
+            --bg: #0f172a; 
+            --card-bg: #1e293b; 
+            --text: #f1f5f9; 
+            --primary: #818cf8; 
+        }
 
-        body { font-family: 'Quicksand', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 10px; transition: 0.3s; position: relative; top: 0 !important; }
-        .container { max-width: 650px; width: 100%; background: var(--card-bg); padding: 25px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: auto; position: relative; min-height: 98vh; z-index: 1; }
+        /* LAYOUT CORE */
+        body { 
+            font-family: 'Quicksand', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 10px; 
+            transition: 0.3s; 
+            position: relative; 
+            top: 0 !important; 
+            padding-bottom: 130px; /* Space for the Foundation Footer */
+        }
 
-        .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 10px 15px; background: rgba(0,0,0,0.05); border-radius: 18px; min-height: 60px; }
-        .icon-btn { background: none; border: none; font-size: 1.4rem; color: var(--text); cursor: pointer; display: flex; align-items: center; }
-        .app-title { font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--primary); margin: 0; text-align: center; flex-grow: 1; }
+        .container { 
+            max-width: 650px; 
+            width: 100%; 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            margin: auto; 
+            position: relative; 
+            min-height: 90vh; 
+        }
 
-        #google_translate_element { z-index: 9999; position: relative; }
+        /* TOP NAVIGATION & HEADER */
+        .header-bar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px; 
+            padding: 10px 15px; 
+            background: rgba(0,0,0,0.05); 
+            border-radius: 18px; 
+            min-height: 60px; 
+        }
 
-        /* TABS */
-        .tabs { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
-        .tab-btn { flex: 1; min-width: 80px; padding: 12px 5px; border: none; background: none; font-weight: 700; cursor: pointer; color: #64748b; font-family: inherit; font-size: 0.75rem; }
-        .tab-btn.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+        .icon-btn { 
+            background: none; 
+            border: none; 
+            font-size: 1.4rem; 
+            color: var(--text); 
+            cursor: pointer; 
+        }
+
+        .app-title { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 18px; 
+            color: var(--primary); 
+            margin: 0; 
+            text-align: center; 
+            flex-grow: 1; 
+        }
+
+        .tabs { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 5px; 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid #e2e8f0; 
+        }
+
+        .tab-btn { 
+            flex: 1; 
+            min-width: 80px; 
+            padding: 12px 5px; 
+            border: none; 
+            background: none; 
+            font-weight: 700; 
+            cursor: pointer; 
+            color: #64748b; 
+            font-family: inherit; 
+            font-size: 0.75rem; 
+        }
+
+        .tab-btn.active { 
+            color: var(--primary); 
+            border-bottom: 3px solid var(--primary); 
+        }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* DAILY SCRIPTURE CARD */
-        .daily-card { background: linear-gradient(135deg, #4f46e5, #818cf8); color: white; padding: 25px; border-radius: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3); }
-        .quote-box { margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2); font-style: italic; font-size: 0.9rem; }
+        /* PERMANENT FOUNDATION FOOTER */
+        .daily-footer { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: linear-gradient(135deg, #4f46e5, #818cf8); 
+            color: white; 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 0.9rem; 
+            z-index: 1000; 
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.2); 
+        }
 
-        /* PATIENT VOICE */
-        .patient-box { background: #f0fdf4; border: 2px solid #22c55e; padding: 30px; border-radius: 20px; text-align: center; }
-        .voice-btn-large { background: #22c55e; color: white; border: none; padding: 20px 30px; border-radius: 15px; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; }
-        
-        /* FORMS */
+        /* CLINICAL ELEMENTS */
+        .card { 
+            padding: 20px; 
+            border-radius: 18px; 
+            border: 1px solid #e2e8f0; 
+            margin-bottom: 15px; 
+            background: var(--card-bg); 
+        }
+
+        .patient-box { 
+            background: #f0fdf4; 
+            border: 2px solid #22c55e; 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+        }
+
         .input-group { margin-bottom: 15px; }
         label { display: block; font-weight: 700; margin-bottom: 5px; font-size: 0.85rem; }
-        select, input { width: 100%; padding: 12px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: var(--card-bg); color: var(--text); box-sizing: border-box; font-family: inherit; }
-        .btn-main { width: 100%; background: var(--primary); color: white; border: none; padding: 16px; border-radius: 14px; font-weight: 700; cursor: pointer; font-size: 1.1rem; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .btn-reset { background: #94a3b8; color: white; border: none; padding: 16px; border-radius: 14px; cursor: pointer; font-size: 1.2rem; }
         
-        /* RESULTS */
-        .result-card { background: var(--card-bg); padding: 20px; border-radius: 18px; border: 1px solid #e2e8f0; margin-bottom: 15px; }
-        .section-label { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 12px; display: block; }
-        
-        iframe { width: 100%; height: 500px; border-radius: 15px; border: 1px solid #ddd; margin-top: 15px; }
-        ul { padding-left: 20px; margin: 0; }
-        li { margin-bottom: 12px; line-height: 1.5; }
+        select, input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1.5px solid #e2e8f0; 
+            border-radius: 12px; 
+            background: var(--card-bg); 
+            color: var(--text); 
+            box-sizing: border-box; 
+            font-family: inherit; 
+        }
+
+        textarea { height: 180px; resize: none; font-size: 1rem; }
+
+        .btn-main { 
+            width: 100%; 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            border-radius: 14px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            margin-top: 10px; 
+            transition: 0.2s;
+        }
+
+        .btn-main:active { transform: scale(0.98); }
+
+        iframe { 
+            width: 100%; 
+            height: 500px; 
+            border-radius: 15px; 
+            border: 1px solid #ddd; 
+            margin-top: 15px; 
+        }
+
+        .section-label { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+            text-transform: uppercase; 
+            margin-bottom: 12px; 
+            display: block; 
+        }
     </style>
 </head>
 <body class="notranslate">
 
-<div class="container translate">
+<div class="container">
     <div class="header-bar">
-        <button onclick="toggleDarkMode()" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+        <button onclick="toggleDarkMode()" class="icon-btn" title="Toggle Dark Mode">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+        </button>
         <h1 class="app-title">The Shepherd's Lens</h1>
         <div id="google_translate_element"></div>
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'daily')">Daily Verse</button>
-        <button class="tab-btn" onclick="openTab(event, 'care')">Visit Plan</button>
+        <button class="tab-btn active" onclick="openTab(event, 'care')">Visit Plan</button>
         <button class="tab-btn" onclick="openTab(event, 'patient-voice')">Patient Voice</button>
         <button class="tab-btn" onclick="openTab(event, 'bible-versions')">Bible Tools</button>
+        <button class="tab-btn" onclick="openTab(event, 'calendar')">Calendar</button>
+        <button class="tab-btn" onclick="openTab(event, 'notebook')">Notebook</button>
         <button class="tab-btn" onclick="openTab(event, 'lords')">Lord's Prayer</button>
     </div>
 
-    <div id="daily" class="tab-content active">
-        <div class="daily-card">
-            <span class="section-label" style="color:rgba(255,255,255,0.8);">Scripture of the Day</span>
-            <h2 id="daily-verse-ref" style="margin: 10px 0;">Joshua 1:9</h2>
-            <p id="daily-verse-text" style="font-size: 1.1rem; line-height: 1.6;">"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."</p>
-            <div class="quote-box">
-                "Leadership is not about titles, positions or flowcharts. It is about one life influencing another." — John C. Maxwell
-            </div>
-        </div>
-    </div>
-
-    <div id="care" class="tab-content">
+    <div id="care" class="tab-content active">
         <div class="input-group">
-            <label>Clinical Situation</label>
+            <label>Current Clinical Context</label>
             <select id="situation">
                 <option value="first_visit">First Time Visit / Introduction</option>
                 <option value="active_dying">Active Dying / End of Life</option>
@@ -94,45 +222,52 @@
             </select>
         </div>
         <div class="input-group">
-            <label>Location</label>
-            <input type="text" id="loc_input" placeholder="e.g. ICU, Room 12, ER">
+            <label>Patient Location (Unit/Room)</label>
+            <input type="text" id="loc_input" placeholder="e.g. Oncology Room 412">
         </div>
-        <div style="display: flex; gap: 10px;">
-            <button class="btn-main" onclick="generateCarePlan()">Cultivate Connection</button>
-            <button class="btn-reset" onclick="masterReset()"><i class="fa-solid fa-rotate-right"></i></button>
-        </div>
+        <button class="btn-main" onclick="generateCarePlan()">Cultivate Connection</button>
 
         <div id="output" style="display:none; margin-top:20px;">
-            <div class="result-card"><span class="section-label">Heart-Centered Questions</span><div id="questions-text"></div></div>
-            <div class="result-card"><span class="section-label">Pastoral Prayer</span><div id="prayer-text" style="font-style: italic; font-size: 1.1rem;"></div></div>
-            <div class="result-card" style="border-left: 5px solid var(--primary);"><span class="section-label">NIV Scripture Reading</span><h3 id="scripture-ref" style="margin:0; color:var(--primary);"></h3><div id="scripture-content" style="font-style: italic; border-left: 4px solid var(--primary); padding-left: 10px;"></div></div>
+            <div class="card">
+                <span class="section-label">Heart-Centered Questions</span>
+                <div id="questions-text"></div>
+            </div>
+            <div class="card">
+                <span class="section-label">Pastoral Prayer</span>
+                <div id="prayer-text" style="font-style: italic; line-height: 1.6;"></div>
+            </div>
+            <div class="card">
+                <span class="section-label">Supporting Scripture</span>
+                <h3 id="scripture-ref" style="margin: 0 0 10px 0; color: var(--primary);"></h3>
+                <div id="scripture-content" style="font-style: italic; border-left: 4px solid var(--primary); padding-left: 10px;"></div>
+            </div>
         </div>
     </div>
 
     <div id="patient-voice" class="tab-content">
         <div class="patient-box">
-            <span class="section-label" style="color:#166534;">Patient Communication</span>
-            <i class="fa-solid fa-microphone-lines" style="font-size: 3rem; color: #22c55e; margin: 20px 0;"></i>
-            <p style="font-size: 1rem; margin-bottom: 25px; line-height: 1.5;">Tap below to launch **Google Voice Translator**. Let the patient speak, it will translate to English instantly.</p>
-            <button class="voice-btn-large" onclick="window.open('https://translate.google.com/?sl=auto&tl=en&op=translate', '_blank')">
-                <i class="fa-solid fa-microphone"></i> Start Patient Voice
+            <i class="fa-solid fa-microphone-lines" style="font-size: 3.5rem; color: #22c55e; margin-bottom: 20px;"></i>
+            <h3>Bedside Translation</h3>
+            <p style="margin-bottom: 25px; line-height: 1.5;">Launch the official Google Voice-to-Voice translator for immediate, accurate bedside communication.</p>
+            <button class="btn-main" style="background:#22c55e;" onclick="window.open('https://translate.google.com/?sl=auto&tl=en&op=translate', '_blank')">
+                <i class="fa-solid fa-microphone"></i> Open Translator
             </button>
         </div>
     </div>
 
     <div id="bible-versions" class="tab-content">
         <div class="input-group">
-            <label>Select Version</label>
+            <label>Translation Version</label>
             <select id="bible-version-select">
                 <option value="NIV">NIV (New International Version)</option>
                 <option value="KJV">KJV (King James Version)</option>
                 <option value="ESV">ESV (English Standard Version)</option>
-                <option value="NASB">NASB (New American Standard Bible)</option>
                 <option value="NLT">NLT (New Living Translation)</option>
+                <option value="NASB">NASB (New American Standard Bible)</option>
             </select>
         </div>
         <div class="input-group">
-            <label>Book</label>
+            <label>Select Biblical Book</label>
             <select id="bible-book">
                 <optgroup label="Old Testament">
                     <option value="Gen">Genesis</option><option value="Exo">Exodus</option><option value="Lev">Leviticus</option><option value="Num">Numbers</option><option value="Deu">Deuteronomy</option><option value="Jos">Joshua</option><option value="Jud">Judges</option><option value="Rut">Ruth</option><option value="1Sa">1 Samuel</option><option value="2Sa">2 Samuel</option><option value="1Ki">1 Kings</option><option value="2Ki">2 Kings</option><option value="1Ch">1 Chronicles</option><option value="2Ch">2 Chronicles</option><option value="Ezr">Ezra</option><option value="Neh">Nehemiah</option><option value="Est">Esther</option><option value="Job">Job</option><option value="Psa">Psalms</option><option value="Pro">Proverbs</option><option value="Ecc">Ecclesiastes</option><option value="Sng">Song of Solomon</option><option value="Isa">Isaiah</option><option value="Jer">Jeremiah</option><option value="Lam">Lamentations</option><option value="Eze">Ezekiel</option><option value="Dan">Daniel</option><option value="Hos">Hosea</option><option value="Joe">Joel</option><option value="Amo">Amos</option><option value="Oba">Obadiah</option><option value="Jon">Jonah</option><option value="Mic">Micah</option><option value="Nah">Nahum</option><option value="Hab">Habakkuk</option><option value="Zep">Zephaniah</option><option value="Hag">Haggai</option><option value="Zec">Zechariah</option><option value="Mal">Malachi</option>
@@ -142,47 +277,81 @@
                 </optgroup>
             </select>
         </div>
-        <div class="input-group"><label>Chapter</label><input type="number" id="bible-chapter" value="1"></div>
-        <button class="btn-main" onclick="loadBible()">Open Scripture</button>
+        <div class="input-group">
+            <label>Chapter</label>
+            <input type="number" id="bible-chapter" value="1" min="1">
+        </div>
+        <button class="btn-main" onclick="loadBible()">Display Scripture</button>
         <iframe id="bible-viewer" src="about:blank"></iframe>
     </div>
 
+    <div id="calendar" class="tab-content">
+        <span class="section-label">Your Clinical Rounds Schedule</span>
+        <iframe src="https://calendar.google.com/calendar/embed?src=primary&ctz=America%2FChicago"></iframe>
+    </div>
+
+    <div id="notebook" class="tab-content">
+        <span class="section-label">Clinical Reflections & Observations</span>
+        <textarea id="notes-area" placeholder="Jot down bedside insights, prayer requests, or Maxwell leadership observations here..."></textarea>
+        <button class="btn-main" style="background:var(--accent);" onclick="saveNotes()">Store Locally on Device</button>
+        <p style="font-size: 0.75rem; color: #64748b; margin-top: 10px; text-align: center;">*Note: Data is saved to your browser cache for privacy.</p>
+    </div>
+
     <div id="lords" class="tab-content">
-        <div class="prayer-display">
-            <div class="prayer-text">
+        <div class="card" style="text-align: center; padding: 40px;">
+            <p style="font-size: 1.3rem; line-height: 2.2;">
                 Our Father, who art in heaven, hallowed be thy name. <br>
                 Thy kingdom come, thy will be done, on earth as it is in heaven. <br><br>
                 Give us this day our daily bread; <br>
                 and forgive us our debts, as we forgive our debtors; <br>
                 and lead us not into temptation, but deliver us from evil. <br><br>
                 <strong>For thine is the kingdom, and the power, and the glory, forever and ever. Amen.</strong>
-            </div>
+            </p>
         </div>
     </div>
 </div>
 
+<div class="daily-footer">
+    <strong id="footer-ref">Joshua 1:9</strong>: 
+    <span id="footer-text">"Be strong and courageous... for the Lord your God will be with you wherever you go."</span>
+    <br>
+    <small style="opacity: 0.9; margin-top: 5px; display: inline-block;">"Leadership is influence—nothing more, nothing less." — John C. Maxwell</small>
+</div>
+
 <script>
+    // NAVIGATION LOGIC
     function openTab(evt, tabName) {
         let i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
         tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.classList.add("active");
     }
 
-    function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+    // THEME LOGIC
+    function toggleDarkMode() { 
+        document.body.classList.toggle('dark-mode'); 
+    }
     
-    function masterReset() {
-        document.getElementById('output').style.display = 'none';
-        document.getElementById('loc_input').value = '';
-        document.getElementById('bible-viewer').src = 'about:blank';
-        const selectField = document.querySelector(".goog-te-combo");
-        if (selectField) { selectField.value = 'en'; selectField.dispatchEvent(new Event('change')); }
-        window.scrollTo(0,0);
+    // STORAGE LOGIC
+    function saveNotes() {
+        localStorage.setItem('chaplain_notes', document.getElementById('notes-area').value);
+        alert('Data successfully cached on this device.');
     }
 
+    window.onload = function() {
+        if(localStorage.getItem('chaplain_notes')) {
+            document.getElementById('notes-area').value = localStorage.getItem('chaplain_notes');
+        }
+    }
+
+    // BIBLE GATEWAY INTEGRATION
     function loadBible() { 
         const b = document.getElementById('bible-book').value; 
         const c = document.getElementById('bible-chapter').value;
@@ -190,53 +359,56 @@
         document.getElementById('bible-viewer').src = `https://www.biblegateway.com/passage/?search=${b}+${c}&version=${v}&interface=print`;
     }
 
+    // CLINICAL CARE LOGIC
     function generateCarePlan() {
         const sit = document.getElementById('situation').value;
         const loc = document.getElementById('loc_input').value || "this setting";
+        
         const data = {
-            first_visit: {
-                q: "<ul><li>What is one thing the medical team might not know about you that is important to who you are?</li><li>In difficult times like these, where do you usually find your greatest strength?</li><li>How can I best support you or your family during your stay here?</li></ul>",
-                p: "Gracious God, I thank You for the life of this person I meet today in " + loc + ". We ask for Your guidance and peace to be felt in this room. May they feel seen, heard, and valued. Amen.",
-                ref: "Numbers 6:24-26",
-                text: "The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you; the Lord turn his face toward you and give you peace."
+            first_visit: { 
+                q: "<ul><li><strong>Connection:</strong> What is one story about your life that always brings a smile to your face?</li><li><strong>Anchor:</strong> In difficult times like these, where do you usually find your greatest strength?</li><li><strong>Value:</strong> What is one thing the medical team might not know about you that is important to who you are?</li></ul>", 
+                p: "Gracious God, I thank You for the life of this person I meet today in " + loc + ". We ask for Your guidance and peace to be felt in this room. May they feel seen, heard, and valued. Amen.", 
+                ref: "Numbers 6:24-26", 
+                text: "The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you." 
             },
             active_dying: { 
-                q: "<ul><li>What is one story or attribute that captures the essence of their spirit?</li><li>What would they want you to know about their love for you in this moment?</li><li>Is there anything left unsaid that your heart needs to express?</li></ul>", 
-                p: "Divine Shepherd, we stand in " + loc + " at the threshold of eternity. We thank You for this life and the love it represents. Grant a gentle transition and the peace that passes understanding. Amen.", 
+                q: "<ul><li><strong>Legacy:</strong> What captures the essence of their spirit?</li><li><strong>Presence:</strong> What would they want you to know about their love for you right now?</li></ul>", 
+                p: "Divine Shepherd, we stand in " + loc + " at the threshold of eternity. Grant a gentle transition and the peace that passes understanding. Amen.", 
                 ref: "Psalm 23:4", 
-                text: "Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me." 
+                text: "Even though I walk through the darkest valley, I will fear no evil, for you are with me." 
             },
             grief: { 
-                q: "<ul><li>What is the hardest part of the 'new normal' you face today?</li><li>How can we honor your love for them in this moment?</li><li>What do you need most from those around you right now?</li></ul>", 
-                p: "God of Comfort, wrap Your arms around this family in " + loc + ". When words fail, let Your Spirit groan on our behalf. Reassure them that love never fails. Amen.", 
+                q: "<ul><li><strong>New Normal:</strong> What is the hardest part of the transition you face today?</li><li><strong>Honor:</strong> How can we honor your love for them in this moment?</li></ul>", 
+                p: "God of Comfort, wrap Your arms around this family in " + loc + ". Reassure them that love never fails. Amen.", 
                 ref: "Psalm 34:18", 
                 text: "The Lord is close to the brokenhearted and saves those who are crushed in spirit." 
             },
             staff_debrief: { 
-                q: "<ul><li>What image or moment from this case is sticking with you the most?</li><li>How is your own spirit holding up while caring for others?</li><li>What do you need to leave here today before going home to your family?</li></ul>", 
-                p: "Lord, we lift up these caregivers. Give them the grace to release the weight they carry and rest in Your strength. Refresh their souls for the path ahead. Amen.", 
+                q: "<ul><li><strong>Observation:</strong> What image or moment from this case is sticking with you?</li><li><strong>Self-Care:</strong> How is your own spirit holding up while caring for others?</li></ul>", 
+                p: "Lord, lift up these caregivers. Give them the grace to release the weight they carry. Refresh their souls. Amen.", 
                 ref: "Matthew 11:28", 
                 text: "Come to me, all you who are weary and burdened, and I will give you rest." 
             },
             anger: { 
-                q: "<ul><li>What is the hurt underneath the heat of this anger?</li><li>Does it feel like something fundamentally 'right' was broken here?</li><li>If you could express this to God without a filter, what would you say?</li></ul>", 
-                p: "Prince of Peace, settle the fire in " + loc + ". We ask for Your justice and Your clarity. Grant us the courage to sit with the pain until the light breaks through. Amen.", 
+                q: "<ul><li><strong>Surface vs Root:</strong> What is the hurt underneath the heat of this anger?</li><li><strong>Justice:</strong> Does it feel like something fundamentally 'right' was broken here?</li></ul>", 
+                p: "Prince of Peace, settle the fire in " + loc + ". Grant us the courage to sit with the pain until light breaks through. Amen.", 
                 ref: "Ephesians 4:26", 
-                text: "In your anger do not sin: Do not let the sun go down while you are still angry." 
+                text: "Do not let the sun go down while you are still angry." 
             },
             anxiety: { 
-                q: "<ul><li>What is one steady anchor in this room you can focus on?</li><li>What 'what if' is speaking the loudest to you right now?</li><li>Can we pray for the peace that transcends all understanding?</li></ul>", 
-                p: "Sovereign Lord, calm the storm in this heart. Replace racing thoughts with the stillness of Your promise. Be the refuge and strength in " + loc + ". Amen.", 
+                q: "<ul><li><strong>Grounding:</strong> What is one steady anchor in this room you can focus on?</li><li><strong>Internal Voice:</strong> What 'what if' is speaking the loudest to you right now?</li></ul>", 
+                p: "Sovereign Lord, calm the storm in this heart. Replace racing thoughts with Your stillness. Amen.", 
                 ref: "Philippians 4:6-7", 
-                text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." 
+                text: "Do not be anxious about anything, but in every situation, by prayer and petition, present your requests to God." 
             },
             sadness: { 
-                q: "<ul><li>If your sadness had a voice, what would it be trying to tell us about your heart?</li><li>Where have you seen even a small glimmer of light today?</li><li>How can I best walk beside you in this silence?</li></ul>", 
-                p: "Lord of Light, shine into the heavy places of this " + loc + ". We don't ask for a quick fix, but for Your steady presence to remain until the dawn breaks. Amen.", 
+                q: "<ul><li><strong>Voice of Sadness:</strong> If your sadness had a voice, what would it be trying to tell us about your heart?</li><li><strong>Glimmer:</strong> Where have you seen even a small glimmer of light today?</li></ul>", 
+                p: "Lord of Light, shine into the heavy places of " + loc + ". We ask for Your steady presence to remain until the dawn. Amen.", 
                 ref: "Psalm 42:11", 
-                text: "Why, my soul, are you downcast? Why so disturbed within me? Put your hope in God." 
+                text: "Why, my soul, are you downcast? Put your hope in God." 
             }
         };
+
         const choice = data[sit] || data['first_visit'];
         document.getElementById('questions-text').innerHTML = choice.q;
         document.getElementById('prayer-text').innerText = choice.p;
@@ -244,8 +416,12 @@
         document.getElementById('scripture-content').innerText = choice.text;
         document.getElementById('output').style.display = 'block';
     }
-    function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
+
+    // TRANSLATION ENGINE INITIALIZATION
+    function googleTranslateElementInit() { 
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); 
+    }
 </script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
