@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Shepherd's Lens | Clinical Compass Pro</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* COLOR PALETTE & THEMING */
+        /* --------------------------------------------------------------------------
+           THEMING & COLOR VARIABLES
+           -------------------------------------------------------------------------- */
         :root { 
             --primary: #4f46e5; 
             --bg: #f8fafc; 
@@ -16,6 +19,7 @@
             --text: #1e293b; 
             --accent: #f59e0b; 
         }
+
         .dark-mode { 
             --bg: #0f172a; 
             --card-bg: #1e293b; 
@@ -23,7 +27,9 @@
             --primary: #818cf8; 
         }
 
-        /* LAYOUT CORE */
+        /* --------------------------------------------------------------------------
+           BASE STYLING & CORE LAYOUT
+           -------------------------------------------------------------------------- */
         body { 
             font-family: 'Quicksand', sans-serif; 
             background-color: var(--bg); 
@@ -33,7 +39,7 @@
             transition: 0.3s; 
             position: relative; 
             top: 0 !important; 
-            padding-bottom: 130px; /* Space for the Foundation Footer */
+            padding-bottom: 140px; /* Essential space for the Foundation Footer */
         }
 
         .container { 
@@ -48,7 +54,9 @@
             min-height: 90vh; 
         }
 
-        /* TOP NAVIGATION & HEADER */
+        /* --------------------------------------------------------------------------
+           HEADER & TOP NAVIGATION
+           -------------------------------------------------------------------------- */
         .header-bar { 
             display: flex; 
             justify-content: space-between; 
@@ -77,6 +85,8 @@
             flex-grow: 1; 
         }
 
+        #google_translate_element { z-index: 9999; position: relative; }
+
         .tabs { 
             display: flex; 
             flex-wrap: wrap; 
@@ -87,7 +97,7 @@
 
         .tab-btn { 
             flex: 1; 
-            min-width: 80px; 
+            min-width: 85px; 
             padding: 12px 5px; 
             border: none; 
             background: none; 
@@ -106,7 +116,9 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* PERMANENT FOUNDATION FOOTER */
+        /* --------------------------------------------------------------------------
+           FOUNDATION FOOTER (PERMANENT)
+           -------------------------------------------------------------------------- */
         .daily-footer { 
             position: fixed; 
             bottom: 0; 
@@ -121,7 +133,9 @@
             box-shadow: 0 -4px 15px rgba(0,0,0,0.2); 
         }
 
-        /* CLINICAL ELEMENTS */
+        /* --------------------------------------------------------------------------
+           CLINICAL UI COMPONENTS
+           -------------------------------------------------------------------------- */
         .card { 
             padding: 20px; 
             border-radius: 18px; 
@@ -152,7 +166,7 @@
             font-family: inherit; 
         }
 
-        textarea { height: 180px; resize: none; font-size: 1rem; }
+        textarea { height: 220px; resize: none; font-size: 1rem; line-height: 1.5; }
 
         .btn-main { 
             width: 100%; 
@@ -186,13 +200,16 @@
             margin-bottom: 12px; 
             display: block; 
         }
+        
+        ul { padding-left: 20px; margin: 0; }
+        li { margin-bottom: 12px; line-height: 1.5; font-size: 1.05rem; }
     </style>
 </head>
 <body class="notranslate">
 
 <div class="container">
     <div class="header-bar">
-        <button onclick="toggleDarkMode()" class="icon-btn" title="Toggle Dark Mode">
+        <button onclick="toggleDarkMode()" class="icon-btn" title="Switch Theme">
             <i class="fa-solid fa-circle-half-stroke"></i>
         </button>
         <h1 class="app-title">The Shepherd's Lens</h1>
@@ -201,9 +218,8 @@
 
     <div class="tabs">
         <button class="tab-btn active" onclick="openTab(event, 'care')">Visit Plan</button>
-        <button class="tab-btn" onclick="openTab(event, 'patient-voice')">Patient Voice</button>
+        <button class="tab-btn" onclick="openTab(event, 'patient-voice')">Patients Voice</button>
         <button class="tab-btn" onclick="openTab(event, 'bible-versions')">Bible Tools</button>
-        <button class="tab-btn" onclick="openTab(event, 'calendar')">Calendar</button>
         <button class="tab-btn" onclick="openTab(event, 'notebook')">Notebook</button>
         <button class="tab-btn" onclick="openTab(event, 'lords')">Lord's Prayer</button>
     </div>
@@ -215,15 +231,15 @@
                 <option value="first_visit">First Time Visit / Introduction</option>
                 <option value="active_dying">Active Dying / End of Life</option>
                 <option value="grief">Grief & Bereavement</option>
-                <option value="staff_debrief">Staff Support / Debriefing</option>
+                <option value="staff_debrief">Staff Support</option>
                 <option value="anger">Anger / Moral Injury</option>
-                <option value="anxiety">Panic / Acute Anxiety</option>
+                <option value="anxiety">Panic / Anxiety</option>
                 <option value="sadness">Deep Sadness / Depression</option>
             </select>
         </div>
         <div class="input-group">
-            <label>Patient Location (Unit/Room)</label>
-            <input type="text" id="loc_input" placeholder="e.g. Oncology Room 412">
+            <label>Location (Optional)</label>
+            <input type="text" id="loc_input" placeholder="e.g. ICU Room 12">
         </div>
         <button class="btn-main" onclick="generateCarePlan()">Cultivate Connection</button>
 
@@ -237,7 +253,7 @@
                 <div id="prayer-text" style="font-style: italic; line-height: 1.6;"></div>
             </div>
             <div class="card">
-                <span class="section-label">Supporting Scripture</span>
+                <span class="section-label">Supporting Scripture Reading</span>
                 <h3 id="scripture-ref" style="margin: 0 0 10px 0; color: var(--primary);"></h3>
                 <div id="scripture-content" style="font-style: italic; border-left: 4px solid var(--primary); padding-left: 10px;"></div>
             </div>
@@ -248,7 +264,7 @@
         <div class="patient-box">
             <i class="fa-solid fa-microphone-lines" style="font-size: 3.5rem; color: #22c55e; margin-bottom: 20px;"></i>
             <h3>Bedside Translation</h3>
-            <p style="margin-bottom: 25px; line-height: 1.5;">Launch the official Google Voice-to-Voice translator for immediate, accurate bedside communication.</p>
+            <p style="margin-bottom: 25px; line-height: 1.5;">Utilize the official voice translation engine for immediate bedside accuracy across multiple languages.</p>
             <button class="btn-main" style="background:#22c55e;" onclick="window.open('https://translate.google.com/?sl=auto&tl=en&op=translate', '_blank')">
                 <i class="fa-solid fa-microphone"></i> Open Translator
             </button>
@@ -256,50 +272,46 @@
     </div>
 
     <div id="bible-versions" class="tab-content">
-        <div class="input-group">
-            <label>Translation Version</label>
-            <select id="bible-version-select">
-                <option value="NIV">NIV (New International Version)</option>
-                <option value="KJV">KJV (King James Version)</option>
-                <option value="ESV">ESV (English Standard Version)</option>
-                <option value="NLT">NLT (New Living Translation)</option>
-                <option value="NASB">NASB (New American Standard Bible)</option>
-            </select>
+        <div class="card" style="background:rgba(0,0,0,0.02);">
+            <div class="input-group">
+                <label>Scripture Translation</label>
+                <select id="bible-version-select">
+                    <option value="NIV">NIV (New International Version)</option>
+                    <option value="KJV">KJV (King James Version)</option>
+                    <option value="ESV">ESV (English Standard Version)</option>
+                    <option value="NLT">NLT (New Living Translation)</option>
+                    <option value="NASB">NASB (New American Standard Bible)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Select Biblical Book</label>
+                <select id="bible-book">
+                    <optgroup label="Old Testament">
+                        <option value="Gen">Genesis</option><option value="Exo">Exodus</option><option value="Lev">Leviticus</option><option value="Num">Numbers</option><option value="Deu">Deuteronomy</option><option value="Jos">Joshua</option><option value="Jud">Judges</option><option value="Rut">Ruth</option><option value="1Sa">1 Samuel</option><option value="2Sa">2 Samuel</option><option value="1Ki">1 Kings</option><option value="2Ki">2 Kings</option><option value="1Ch">1 Chronicles</option><option value="2Ch">2 Chronicles</option><option value="Ezr">Ezra</option><option value="Neh">Nehemiah</option><option value="Est">Esther</option><option value="Job">Job</option><option value="Psa">Psalms</option><option value="Pro">Proverbs</option><option value="Ecc">Ecclesiastes</option><option value="Sng">Song of Solomon</option><option value="Isa">Isaiah</option><option value="Jer">Jeremiah</option><option value="Lam">Lamentations</option><option value="Eze">Ezekiel</option><option value="Dan">Daniel</option><option value="Hos">Hosea</option><option value="Joe">Joel</option><option value="Amo">Amos</option><option value="Oba">Obadiah</option><option value="Jon">Jonah</option><option value="Mic">Micah</option><option value="Nah">Nahum</option><option value="Hab">Habakkuk</option><option value="Zep">Zephaniah</option><option value="Hag">Haggai</option><option value="Zec">Zechariah</option><option value="Mal">Malachi</option>
+                    </optgroup>
+                    <optgroup label="New Testament">
+                        <option value="Mat">Matthew</option><option value="Mrk">Mark</option><option value="Luk">Luke</option><option value="Joh">John</option><option value="Act">Acts</option><option value="Rom">Romans</option><option value="1Co">1 Corinthians</option><option value="2Co">2 Corinthians</option><option value="Gal">Galatians</option><option value="Eph">Ephesians</option><option value="Php">Philippians</option><option value="Col">Colossians</option><option value="1Th">1 Thessalonians</option><option value="2Th">2 Thessalonians</option><option value="1Ti">1 Timothy</option><option value="2Ti">2 Timothy</option><option value="Tit">Titus</option><option value="Phm">Philemon</option><option value="Heb">Hebrews</option><option value="Jas">James</option><option value="1Pe">1 Peter</option><option value="2Pe">2 Peter</option><option value="1Jo">1 John</option><option value="2Jo">2 John</option><option value="3Jo">3 John</option><option value="Jud">Jude</option><option value="Rev">Revelation</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Chapter</label>
+                <input type="number" id="bible-chapter" value="1" min="1">
+            </div>
+            <button class="btn-main" onclick="loadBible()">Display Word</button>
+            <iframe id="bible-viewer" src="about:blank"></iframe>
         </div>
-        <div class="input-group">
-            <label>Select Biblical Book</label>
-            <select id="bible-book">
-                <optgroup label="Old Testament">
-                    <option value="Gen">Genesis</option><option value="Exo">Exodus</option><option value="Lev">Leviticus</option><option value="Num">Numbers</option><option value="Deu">Deuteronomy</option><option value="Jos">Joshua</option><option value="Jud">Judges</option><option value="Rut">Ruth</option><option value="1Sa">1 Samuel</option><option value="2Sa">2 Samuel</option><option value="1Ki">1 Kings</option><option value="2Ki">2 Kings</option><option value="1Ch">1 Chronicles</option><option value="2Ch">2 Chronicles</option><option value="Ezr">Ezra</option><option value="Neh">Nehemiah</option><option value="Est">Esther</option><option value="Job">Job</option><option value="Psa">Psalms</option><option value="Pro">Proverbs</option><option value="Ecc">Ecclesiastes</option><option value="Sng">Song of Solomon</option><option value="Isa">Isaiah</option><option value="Jer">Jeremiah</option><option value="Lam">Lamentations</option><option value="Eze">Ezekiel</option><option value="Dan">Daniel</option><option value="Hos">Hosea</option><option value="Joe">Joel</option><option value="Amo">Amos</option><option value="Oba">Obadiah</option><option value="Jon">Jonah</option><option value="Mic">Micah</option><option value="Nah">Nahum</option><option value="Hab">Habakkuk</option><option value="Zep">Zephaniah</option><option value="Hag">Haggai</option><option value="Zec">Zechariah</option><option value="Mal">Malachi</option>
-                </optgroup>
-                <optgroup label="New Testament">
-                    <option value="Mat">Matthew</option><option value="Mrk">Mark</option><option value="Luk">Luke</option><option value="Joh">John</option><option value="Act">Acts</option><option value="Rom">Romans</option><option value="1Co">1 Corinthians</option><option value="2Co">2 Corinthians</option><option value="Gal">Galatians</option><option value="Eph">Ephesians</option><option value="Php">Philippians</option><option value="Col">Colossians</option><option value="1Th">1 Thessalonians</option><option value="2Th">2 Thessalonians</option><option value="1Ti">1 Timothy</option><option value="2Ti">2 Timothy</option><option value="Tit">Titus</option><option value="Phm">Philemon</option><option value="Heb">Hebrews</option><option value="Jas">James</option><option value="1Pe">1 Peter</option><option value="2Pe">2 Peter</option><option value="1Jo">1 John</option><option value="2Jo">2 John</option><option value="3Jo">3 John</option><option value="Jud">Jude</option><option value="Rev">Revelation</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="input-group">
-            <label>Chapter</label>
-            <input type="number" id="bible-chapter" value="1" min="1">
-        </div>
-        <button class="btn-main" onclick="loadBible()">Display Scripture</button>
-        <iframe id="bible-viewer" src="about:blank"></iframe>
-    </div>
-
-    <div id="calendar" class="tab-content">
-        <span class="section-label">Your Clinical Rounds Schedule</span>
-        <iframe src="https://calendar.google.com/calendar/embed?src=primary&ctz=America%2FChicago"></iframe>
     </div>
 
     <div id="notebook" class="tab-content">
-        <span class="section-label">Clinical Reflections & Observations</span>
-        <textarea id="notes-area" placeholder="Jot down bedside insights, prayer requests, or Maxwell leadership observations here..."></textarea>
-        <button class="btn-main" style="background:var(--accent);" onclick="saveNotes()">Store Locally on Device</button>
-        <p style="font-size: 0.75rem; color: #64748b; margin-top: 10px; text-align: center;">*Note: Data is saved to your browser cache for privacy.</p>
+        <span class="section-label">Bedside Reflections & Notes</span>
+        <textarea id="notes-area" placeholder="Record your observations here... they will remain stored locally on your device hardware for HIPAA-compliant privacy."></textarea>
+        <button class="btn-main" style="background:var(--accent);" onclick="saveNotes()">Secure Notes to Device</button>
     </div>
 
     <div id="lords" class="tab-content">
         <div class="card" style="text-align: center; padding: 40px;">
-            <p style="font-size: 1.3rem; line-height: 2.2;">
+            <p style="font-size: 1.25rem; line-height: 2.2;">
                 Our Father, who art in heaven, hallowed be thy name. <br>
                 Thy kingdom come, thy will be done, on earth as it is in heaven. <br><br>
                 Give us this day our daily bread; <br>
@@ -319,7 +331,7 @@
 </div>
 
 <script>
-    // NAVIGATION LOGIC
+    // TAB NAVIGATION HANDLER
     function openTab(evt, tabName) {
         let i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tab-content");
@@ -334,15 +346,15 @@
         evt.currentTarget.classList.add("active");
     }
 
-    // THEME LOGIC
+    // THEME SWITCHER
     function toggleDarkMode() { 
         document.body.classList.toggle('dark-mode'); 
     }
     
-    // STORAGE LOGIC
+    // LOCAL STORAGE PERSISTENCE
     function saveNotes() {
         localStorage.setItem('chaplain_notes', document.getElementById('notes-area').value);
-        alert('Data successfully cached on this device.');
+        alert('Notes successfully stored on this hardware.');
     }
 
     window.onload = function() {
@@ -351,7 +363,7 @@
         }
     }
 
-    // BIBLE GATEWAY INTEGRATION
+    // BIBLE GATEWAY IFRAME INTEGRATION
     function loadBible() { 
         const b = document.getElementById('bible-book').value; 
         const c = document.getElementById('bible-chapter').value;
@@ -359,51 +371,51 @@
         document.getElementById('bible-viewer').src = `https://www.biblegateway.com/passage/?search=${b}+${c}&version=${v}&interface=print`;
     }
 
-    // CLINICAL CARE LOGIC
+    // CLINICAL CARE GENERATOR: CONVERSATIONAL QUESTIONS
     function generateCarePlan() {
         const sit = document.getElementById('situation').value;
-        const loc = document.getElementById('loc_input').value || "this setting";
+        const loc = document.getElementById('loc_input').value || "this room";
         
         const data = {
             first_visit: { 
-                q: "<ul><li><strong>Connection:</strong> What is one story about your life that always brings a smile to your face?</li><li><strong>Anchor:</strong> In difficult times like these, where do you usually find your greatest strength?</li><li><strong>Value:</strong> What is one thing the medical team might not know about you that is important to who you are?</li></ul>", 
-                p: "Gracious God, I thank You for the life of this person I meet today in " + loc + ". We ask for Your guidance and peace to be felt in this room. May they feel seen, heard, and valued. Amen.", 
+                q: "<ul><li>\"What is one story from your life that always brings a smile to your face?\"</li><li>\"When life gets challenging like this, where do you find your greatest strength?\"</li><li>\"Is there something important about who you are that the medical team hasn't learned yet?\"</li></ul>", 
+                p: "Gracious God, I thank You for this person I meet today in " + loc + ". We ask for Your peace to settle in this room. May they feel seen, heard, and deeply valued. Amen.", 
                 ref: "Numbers 6:24-26", 
                 text: "The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you." 
             },
             active_dying: { 
-                q: "<ul><li><strong>Legacy:</strong> What captures the essence of their spirit?</li><li><strong>Presence:</strong> What would they want you to know about their love for you right now?</li></ul>", 
+                q: "<ul><li>\"What is the one word or memory that captures the true essence of who they are?\"</li><li>\"What do you think they would want you to know about their love for you right now?\"</li></ul>", 
                 p: "Divine Shepherd, we stand in " + loc + " at the threshold of eternity. Grant a gentle transition and the peace that passes understanding. Amen.", 
                 ref: "Psalm 23:4", 
                 text: "Even though I walk through the darkest valley, I will fear no evil, for you are with me." 
             },
             grief: { 
-                q: "<ul><li><strong>New Normal:</strong> What is the hardest part of the transition you face today?</li><li><strong>Honor:</strong> How can we honor your love for them in this moment?</li></ul>", 
+                q: "<ul><li>\"What has been the hardest part of these first few steps of this new journey?\"</li><li>\"How can we best honor your love for them in the middle of this pain?\"</li></ul>", 
                 p: "God of Comfort, wrap Your arms around this family in " + loc + ". Reassure them that love never fails. Amen.", 
                 ref: "Psalm 34:18", 
                 text: "The Lord is close to the brokenhearted and saves those who are crushed in spirit." 
             },
             staff_debrief: { 
-                q: "<ul><li><strong>Observation:</strong> What image or moment from this case is sticking with you?</li><li><strong>Self-Care:</strong> How is your own spirit holding up while caring for others?</li></ul>", 
+                q: "<ul><li>\"What is the one image or moment from this shift that is sticking with you?\"</li><li>\"How is your own spirit holding up while you've been caring for everyone else?\"</li></ul>", 
                 p: "Lord, lift up these caregivers. Give them the grace to release the weight they carry. Refresh their souls. Amen.", 
                 ref: "Matthew 11:28", 
                 text: "Come to me, all you who are weary and burdened, and I will give you rest." 
             },
             anger: { 
-                q: "<ul><li><strong>Surface vs Root:</strong> What is the hurt underneath the heat of this anger?</li><li><strong>Justice:</strong> Does it feel like something fundamentally 'right' was broken here?</li></ul>", 
+                q: "<ul><li>\"What is the hurt underneath the heat of this anger right now?\"</li><li>\"Does it feel like something fundamentally 'right' was broken or lost here?\"</li></ul>", 
                 p: "Prince of Peace, settle the fire in " + loc + ". Grant us the courage to sit with the pain until light breaks through. Amen.", 
                 ref: "Ephesians 4:26", 
                 text: "Do not let the sun go down while you are still angry." 
             },
             anxiety: { 
-                q: "<ul><li><strong>Grounding:</strong> What is one steady anchor in this room you can focus on?</li><li><strong>Internal Voice:</strong> What 'what if' is speaking the loudest to you right now?</li></ul>", 
+                q: "<ul><li>\"What is one small, steady thing in this room you can focus on right now?\"</li><li>\"What 'what if' is speaking the loudest to you in this moment?\"</li></ul>", 
                 p: "Sovereign Lord, calm the storm in this heart. Replace racing thoughts with Your stillness. Amen.", 
                 ref: "Philippians 4:6-7", 
-                text: "Do not be anxious about anything, but in every situation, by prayer and petition, present your requests to God." 
+                text: "Do not be anxious about anything, but in every situation... present your requests to God." 
             },
             sadness: { 
-                q: "<ul><li><strong>Voice of Sadness:</strong> If your sadness had a voice, what would it be trying to tell us about your heart?</li><li><strong>Glimmer:</strong> Where have you seen even a small glimmer of light today?</li></ul>", 
-                p: "Lord of Light, shine into the heavy places of " + loc + ". We ask for Your steady presence to remain until the dawn. Amen.", 
+                q: "<ul><li>\"If your sadness had a voice, what would it be trying to tell us about your heart?\"</li><li>\"Where have you seen even a small glimmer of light in the middle of this darkness?\"</li></ul>", 
+                p: "Lord of Light, shine into the heavy places of " + loc + ". We ask for Your steady presence to remain until the dawn breaks. Amen.", 
                 ref: "Psalm 42:11", 
                 text: "Why, my soul, are you downcast? Put your hope in God." 
             }
@@ -417,7 +429,7 @@
         document.getElementById('output').style.display = 'block';
     }
 
-    // TRANSLATION ENGINE INITIALIZATION
+    // GOOGLE TRANSLATE WIDGET INITIALIZATION
     function googleTranslateElementInit() { 
         new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); 
     }
