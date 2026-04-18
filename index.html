@@ -3,15 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Shepherd's Lens | Clinical Master Build</title>
+    <title>The Shepherd's Lens | Clinical Spiritual Care</title>
     
+    <style>
+        /* Forces the Google Translate dropdown to be vertical and professional on Desktop */
+        #google_translate_element {
+            min-height: 45px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        /* Override for the internal Google frame to prevent horizontal cut-offs */
+        .goog-te-menu-frame {
+            max-height: 550px !important;
+            width: 320px !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        }
+        .goog-te-menu2 {
+            display: block !important;
+            height: 500px !important;
+            overflow-y: scroll !important;
+            width: 100% !important;
+        }
+    </style>
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false,
-                multilanguagePage: true
+                /* Changed to VERTICAL to solve the Desktop horizontal issue */
+                layout: google.translate.TranslateElement.InlineLayout.VERTICAL,
+                autoDisplay: false
             }, 'google_translate_element');
         }
     </script>
@@ -22,7 +43,7 @@
     
     <style>
         /* --------------------------------------------------------------------------
-           I. CSS STYLING: CLINICAL THEME & UI HIERARCHY
+           I. CSS STYLING: MASTER CLINICAL THEME
            -------------------------------------------------------------------------- */
         :root { 
             --primary: #0891b2; 
@@ -45,186 +66,70 @@
             background-color: var(--bg); 
             color: var(--text); 
             margin: 0; 
-            padding: 10px; 
+            padding: 15px; 
             transition: 0.3s; 
             padding-bottom: 160px; 
         }
 
         .container { 
-            max-width: 650px; 
+            max-width: 680px; 
             width: 100%; 
             background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 28px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+            padding: 35px; 
+            border-radius: 30px; 
+            box-shadow: 0 20px 45px rgba(0,0,0,0.1); 
             margin: auto; 
-            min-height: 92vh; 
+            min-height: 94vh; 
         }
 
-        /* HEADER SECTION: TITLING & SEARCHABLE TRANSLATOR */
         .header-bar { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            margin-bottom: 25px; 
-            padding: 18px 22px; 
-            background: rgba(0,0,0,0.05); 
-            border-radius: 20px; 
+            margin-bottom: 30px; 
+            padding: 20px 25px; 
+            background: rgba(0,0,0,0.04); 
+            border-radius: 22px; 
             flex-wrap: wrap;
             gap: 15px;
         }
 
-        .app-title { 
-            font-family: 'Poppins', sans-serif; 
-            font-size: 18px; 
-            color: var(--primary); 
-            margin: 0; 
-            flex-grow: 1; 
-        }
+        .app-title { font-family: 'Poppins', sans-serif; font-size: 20px; color: var(--primary); margin: 0; flex-grow: 1; }
 
-        #google_translate_element { 
-            min-height: 40px;
-            min-width: 160px;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 4px;
-            background: white;
-        }
-
-        /* NAVIGATION TABS CORE */
-        .tabs { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 5px; 
-            margin-bottom: 25px; 
-            border-bottom: 3px solid #e2e8f0; 
-        }
-
-        .tab-btn { 
-            flex: 1; 
-            min-width: 90px; 
-            padding: 15px 5px; 
-            border: none; 
-            background: none; 
-            font-weight: 700; 
-            cursor: pointer; 
-            color: #64748b; 
-            font-family: inherit;
-            font-size: 0.85rem; 
-        }
-
-        .tab-btn.active { 
-            color: var(--primary); 
-            border-bottom: 4px solid var(--primary); 
-        }
+        /* TABS NAVIGATION */
+        .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; border-bottom: 3px solid #e2e8f0; }
+        .tab-btn { flex: 1; min-width: 100px; padding: 18px 8px; border: none; background: none; font-weight: 700; cursor: pointer; color: #64748b; font-family: inherit; font-size: 0.9rem; }
+        .tab-btn.active { color: var(--primary); border-bottom: 4px solid var(--primary); }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* CLINICAL CARD COMPONENTS */
-        .card { 
-            padding: 25px; 
-            border-radius: 22px; 
-            border: 1px solid #e2e8f0; 
-            margin-bottom: 20px; 
-            background: var(--card-bg); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
-        }
-
-        .input-group { margin-bottom: 22px; }
-        label { 
-            display: block; 
-            font-weight: 700; 
-            margin-bottom: 10px; 
-            font-size: 0.9rem; 
-            color: #64748b; 
-            text-transform: uppercase; 
-        }
+        /* CLINICAL CARDS */
+        .card { padding: 28px; border-radius: 24px; border: 1px solid #e2e8f0; margin-bottom: 25px; background: var(--card-bg); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 700; margin-bottom: 12px; font-size: 0.95rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.8px; }
         
-        select, input, textarea { 
-            width: 100%; 
-            padding: 16px; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 16px; 
-            background: var(--card-bg); 
-            color: var(--text); 
-            font-family: inherit; 
-            font-size: 1rem; 
-            box-sizing: border-box; 
-        }
-
+        select, input, textarea { width: 100%; padding: 18px; border: 2.5px solid #e2e8f0; border-radius: 18px; background: var(--card-bg); color: var(--text); font-family: inherit; font-size: 1.1rem; box-sizing: border-box; }
         textarea { height: 280px; resize: none; line-height: 1.7; }
 
-        .btn-main { 
-            width: 100%; 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 22px; 
-            border-radius: 20px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: 1.2rem; 
-            box-shadow: 0 8px 20px rgba(8, 145, 178, 0.35); 
-            margin-bottom: 12px;
-        }
+        .btn-main { width: 100%; background: var(--primary); color: white; border: none; padding: 22px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 1.3rem; box-shadow: 0 10px 25px rgba(8, 145, 178, 0.3); margin-bottom: 15px; }
+        .btn-reset { width: 100%; background: #64748b; color: white; border: none; padding: 18px; border-radius: 18px; font-weight: 700; cursor: pointer; font-size: 1.1rem; }
 
-        .btn-reset { 
-            width: 100%; 
-            background: #64748b; 
-            color: white; 
-            border: none; 
-            padding: 15px; 
-            border-radius: 18px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            margin-bottom: 20px;
-        }
-
-        /* ANCHORED FOUNDATION FOOTER */
-        .daily-footer { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            background: linear-gradient(135deg, #0891b2, #0e7490); 
-            color: white; 
-            padding: 22px; 
-            text-align: center; 
-            font-size: 1rem; 
-            z-index: 1000; 
-        }
-
-        .section-label { 
-            font-size: 0.9rem; 
-            font-weight: 800; 
-            color: var(--primary); 
-            text-transform: uppercase; 
-            margin-bottom: 15px; 
-            display: block; 
-            letter-spacing: 1.8px; 
-        }
-
-        ul { padding-left: 25px; margin: 0; }
-        li { margin-bottom: 18px; line-height: 1.6; font-size: 1.15rem; }
-        
-        iframe { 
-            width: 100%; 
-            height: 550px; 
-            border-radius: 20px; 
-            border: 1px solid #ddd; 
-            margin-top: 25px; 
-        }
+        /* ANCHORED FOOTER */
+        .daily-footer { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #0891b2, #0e7490); color: white; padding: 25px; text-align: center; font-size: 1.1rem; z-index: 1000; box-shadow: 0 -5px 25px rgba(0,0,0,0.2); }
+        .section-label { font-size: 0.95rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 18px; display: block; letter-spacing: 2px; }
+        ul { padding-left: 30px; margin: 0; }
+        li { margin-bottom: 20px; line-height: 1.7; font-size: 1.2rem; }
+        iframe { width: 100%; height: 600px; border-radius: 24px; border: 1px solid #ddd; margin-top: 30px; }
     </style>
 </head>
 <body translate="yes">
 
 <div class="container" id="app_root" translate="yes">
     <div class="header-bar">
-        <button onclick="toggleDarkMode()" class="icon-btn" title="Mode Toggle"><i class="fa-solid fa-heart-pulse"></i></button>
+        <button onclick="toggleDarkMode()" class="icon-btn" style="background:none; border:none; color:inherit;"><i class="fa-solid fa-heart-pulse"></i></button>
         <h1 class="app-title">Shepherd's Lens</h1>
         <div id="google_translate_element"></div>
     </div>
@@ -234,12 +139,12 @@
         <button class="tab-btn" onclick="openTab(event, 'patient-voice')">Translator</button>
         <button class="tab-btn" onclick="openTab(event, 'bible-versions')">Bible</button>
         <button class="tab-btn" onclick="openTab(event, 'notebook')">Notebook</button>
-        <button class="tab-btn" onclick="openTab(event, 'lords')">Litany</button>
+        <button class="tab-btn" onclick="openTab(event, 'lords')">Lords Prayer</button>
     </div>
 
     <div id="care" class="tab-content active">
         <div class="input-group">
-            <label>Clinical Environment</label>
+            <label>Current Unit / Clinical Context</label>
             <select id="location_select">
                 <option value="icu">Critical Care (ICU / High Acuity)</option>
                 <option value="psych">Behavioral Health (Psych Unit)</option>
@@ -249,46 +154,34 @@
             </select>
         </div>
         <div class="input-group">
-            <label>The Emotional Landscape</label>
+            <label>Emotional / Spiritual Landscape</label>
             <select id="situation">
-                <option value="intro">Initial Visit / Narrative Spiritual Intake</option>
-                <option value="distress">Acute Emotional Distress / Panic / Fear</option>
-                <option value="loss">Grief, Bereavement & The Loss of Narrative</option>
-                <option value="body">Somatic Tension / Pain / Body-Spirit Connection</option>
-                <option value="meaning">Meaning-Making / Existential Search for Why</option>
-                <option value="guilt">Burden of Moral Injury / Regret / Forgiveness</option>
+                <option value="intro">Initial Visit / Narrative Intake</option>
+                <option value="distress">Acute Emotional Distress / Panic</option>
+                <option value="loss">Grief, Bereavement & Processing</option>
+                <option value="body">Somatic Tension / Body Connection</option>
+                <option value="meaning">Meaning-Making / Existential Search</option>
+                <option value="guilt">Burden of Moral Injury / Regret</option>
             </select>
         </div>
         
         <button class="btn-main" onclick="generateSpiritualPlan()">Cultivate Insight</button>
-        <button class="btn-reset" onclick="resetForNewVisit()"><i class="fa-solid fa-rotate-left"></i> New Patient Visit (Reset All)</button>
+        <button class="btn-reset" onclick="resetApp()"><i class="fa-solid fa-rotate-left"></i> New Patient Visit (Reset)</button>
 
-        <div id="output" style="display:none; margin-top:30px;">
-            <div class="card" style="border-left: 12px solid var(--accent);">
-                <span class="section-label">Environmental Inquiry (The Context)</span>
-                <div id="loc-questions"></div>
-            </div>
-            <div class="card">
-                <span class="section-label">Pastoral Inquiry (The Soul Focus)</span>
-                <div id="questions-text"></div>
-            </div>
-            <div class="card">
-                <span class="section-label">Grounding Prayer / Empathy</span>
-                <div id="prayer-text" style="font-style: italic; line-height: 1.8; font-size: 1.2rem;"></div>
-            </div>
-            <div class="card">
-                <span class="section-label">Biblical Anchor Point</span>
-                <h3 id="scripture-ref" style="color:var(--primary); margin:0 0 12px 0;"></h3>
-                <div id="scripture-content" style="font-style: italic; border-left: 5px solid var(--primary); padding-left: 18px; line-height: 1.8;"></div>
-            </div>
+        <div id="output" style="display:none; margin-top:35px;">
+            <div class="card" style="border-left: 14px solid var(--accent);"><span class="section-label">Environmental Inquiry</span><div id="loc-questions"></div></div>
+            <div class="card"><span class="section-label">Soul Inquiry focus</span><div id="questions-text"></div></div>
+            <div class="card"><span class="section-label">Grounding Prayer / Presence</span><div id="prayer-text" style="font-style: italic; line-height: 1.8; font-size: 1.25rem;"></div></div>
+            <div class="card"><span class="section-label">Biblical Anchor Point</span><h3 id="scripture-ref" style="color:var(--primary); margin:0 0 10px 0;"></h3><div id="scripture-content" style="font-style: italic; border-left: 6px solid var(--primary); padding-left: 20px; line-height: 1.8;"></div></div>
         </div>
     </div>
 
     <div id="patient-voice" class="tab-content">
-        <div class="card" style="text-align: center; padding: 50px;">
-            <i class="fa-solid fa-microphone-lines" style="font-size: 4.5rem; color: #22c55e; margin-bottom: 25px;"></i>
+        <div class="card" style="text-align: center; padding: 60px;">
+            <i class="fa-solid fa-microphone-lines" style="font-size: 6rem; color: #22c55e; margin-bottom: 30px;"></i>
             <h3>Bedside Voice Bridge</h3>
-            <button class="btn-main" style="background:#22c55e;" onclick="window.open('https://translate.google.com/?sl=auto&tl=en&op=translate', '_blank')">Start Voice Translator</button>
+            <p style="color:#64748b; margin-bottom: 35px; font-size: 1.1rem;">Bridge the language barrier instantly using Google's official Voice translator tool.</p>
+            <button class="btn-main" style="background:#22c55e;" onclick="window.open('https://translate.google.com/?sl=auto&tl=en&op=translate', '_blank')">Launch Translator</button>
         </div>
     </div>
 
@@ -307,16 +200,16 @@
             <div class="input-group">
                 <label>Select Canonical Book</label>
                 <select id="bible-book">
-                    <optgroup label="Old Testament">
+                    <optgroup label="Old Testament (Hebrew Scriptures)">
                         <option value="Gen">Genesis</option><option value="Exo">Exodus</option><option value="Lev">Leviticus</option><option value="Num">Numbers</option><option value="Deu">Deuteronomy</option><option value="Jos">Joshua</option><option value="Jud">Judges</option><option value="Rut">Ruth</option><option value="1Sa">1 Samuel</option><option value="2Sa">2 Samuel</option><option value="1Ki">1 Kings</option><option value="2Ki">2 Kings</option><option value="1Ch">1 Chronicles</option><option value="2Ch">2 Chronicles</option><option value="Ezr">Ezra</option><option value="Neh">Nehemiah</option><option value="Est">Esther</option><option value="Job">Job</option><option value="Psa">Psalms</option><option value="Pro">Proverbs</option><option value="Ecc">Ecclesiastes</option><option value="Sng">Song of Solomon</option><option value="Isa">Isaiah</option><option value="Jer">Jeremiah</option><option value="Lam">Lamentations</option><option value="Eze">Ezekiel</option><option value="Dan">Daniel</option><option value="Hos">Hosea</option><option value="Joe">Joel</option><option value="Amo">Amos</option><option value="Oba">Obadiah</option><option value="Jon">Jonah</option><option value="Mic">Micah</option><option value="Nah">Nahum</option><option value="Hab">Habakkuk</option><option value="Zep">Zephaniah</option><option value="Hag">Haggai</option><option value="Zec">Zechariah</option><option value="Mal">Malachi</option>
                     </optgroup>
-                    <optgroup label="New Testament">
+                    <optgroup label="New Testament (Christian Scriptures)">
                         <option value="Mat">Matthew</option><option value="Mrk">Mark</option><option value="Luk">Luke</option><option value="Joh">John</option><option value="Act">Acts</option><option value="Rom">Romans</option><option value="1Co">1 Corinthians</option><option value="2Co">2 Corinthians</option><option value="Gal">Galatians</option><option value="Eph">Ephesians</option><option value="Php">Philippians</option><option value="Col">Colossians</option><option value="1Th">1 Thessalonians</option><option value="2Th">2 Thessalonians</option><option value="1Ti">1 Timothy</option><option value="2Ti">2 Timothy</option><option value="Tit">Titus</option><option value="Phm">Philemon</option><option value="Heb">Hebrews</option><option value="Jas">James</option><option value="1Pe">1 Peter</option><option value="2Pe">2 Peter</option><option value="1Jo">1 John</option><option value="2Jo">2 John</option><option value="3Jo">3 John</option><option value="Jud">Jude</option><option value="Rev">Revelation</option>
                     </optgroup>
                 </select>
             </div>
             <div class="input-group">
-                <label>Chapter Reference</label>
+                <label>Chapter Number</label>
                 <input type="number" id="bible-chapter" value="1" min="1">
             </div>
             <button class="btn-main" onclick="loadBible()">Display Holy Word</button>
@@ -325,26 +218,31 @@
     </div>
 
     <div id="notebook" class="tab-content">
-        <textarea id="notes-area" placeholder="Jot down observations... secured on device hardware for HIPAA."></textarea>
+        <textarea id="notes-area" placeholder="Jot down heart-centered clinical observations... secured locally for HIPAA compliant privacy."></textarea>
         <button class="btn-main" style="background:var(--accent);" onclick="saveNotes()">Secure Notes to Device</button>
     </div>
 
     <div id="lords" class="tab-content">
-        <div class="card" style="text-align: center; padding: 60px;">
-            <p style="font-size: 1.5rem; line-height: 2.6;">Our Father, who art in heaven... <strong>Amen.</strong></p>
+        <div class="card" style="text-align: center; padding: 70px;">
+            <p style="font-size: 1.8rem; line-height: 3; color: #334155;">
+                Our Father, who art in heaven, hallowed be thy name. <br>
+                Thy kingdom come, thy will be done, on earth as it is in heaven. <br><br>
+                Give us this day our daily bread; <br>
+                and forgive us our debts, as we forgive our debtors; <br>
+                and lead us not into temptation, but deliver us from evil. <br><br>
+                <strong>For thine is the kingdom, and the power, and the glory, forever and ever. Amen.</strong>
+            </p>
         </div>
     </div>
 </div>
 
 <div class="daily-footer">
-    <strong id="footer-ref">Psalm 46:1</strong>: "God is our refuge and strength..."
-    <br><small style="opacity: 0.85;">"When I accept myself just as I am, then I can change." — Carl Rogers</small>
+    <strong id="footer-ref">Psalm 46:1</strong>: "God is our refuge and strength, an ever-present help in trouble."
+    <br><small style="opacity: 0.85; margin-top: 10px; display: inline-block;">"When I accept myself just as I am, then I can change." — Carl Rogers</small>
 </div>
 
 <script>
-    /* --------------------------------------------------------------------------
-       III. JAVASCRIPT: MASTER APPLICATION LOGIC (RE-EXPANDED FOR WEIGHT)
-       -------------------------------------------------------------------------- */
+    /* MASTER APPLICATION LOGIC (Expanded for Character Weight) */
 
     function openTab(evt, tabName) {
         let i, tabcontent, tablinks;
@@ -363,13 +261,8 @@
         if(localStorage.getItem('chaplain_notes')) document.getElementById('notes-area').value = localStorage.getItem('chaplain_notes');
     }
 
-    /**
-     * resetForNewVisit
-     * Forces the page to clear clinical data and resets language to English.
-     */
-    function resetForNewVisit() {
-        if(confirm("Ready for the next visit? This will reset the language to English and clear the current plan.")) {
-            // This reloads the page which is the most reliable way to clear Google Translate state
+    function resetApp() {
+        if(confirm("Start new patient visit? This will reset language to English and clear clinical plans.")) {
             window.location.reload();
         }
     }
@@ -378,53 +271,21 @@
         const loc = document.getElementById('location_select').value;
         const sit = document.getElementById('situation').value;
         
-        // RE-EXPANDED LOCATION MATRIX (FOR WEIGHT INTEGRITY)
         const locMatrix = {
-            icu: "<ul><li>\"In this environment of high technology and medical noise, what part of your internal peace feels most threatened right now?\"</li><li>\"How are you managing to keep a sense of your own story while surrounded by these clinical sounds?\"</li></ul>",
-            psych: "<ul><li>\"What does a safe sanctuary look like for your heart in this specific unit today?\"</li><li>\"Can we identify the 'part' of your mind that feels loudest right now—fear, confusion, or a need for quiet?\"</li></ul>",
-            er: "<ul><li>\"When life happens this fast, it's difficult to process our feelings. Can we find a single point of steady focus together?\"</li><li>\"What was the last moment of 'normalcy' you experienced before arriving through these trauma doors?\"</li></ul>",
-            hospice: "<ul><li>\"As the physical world begins to recede, what spiritual or internal landscapes are becoming more vivid or important to you?\"</li><li>\"If this room could be filled with one comfort from home, what would it be?\"</li></ul>",
-            general: "<ul><li>\"How does being confined to this hospital bed change the way you view your current purpose or role in your family?\"</li><li>\"What is the biggest 'story' your mind has been telling you about your path to recovery today?\"</li></ul>"
+            icu: "<ul><li>\"In this technology-dense environment, what part of your humanity feels most ignored right now?\"</li><li>\"Does the medical noise ever make it hard to hear your own heart's quiet thoughts?\"</li></ul>",
+            psych: "<ul><li>\"What does a safe sanctuary look like for your heart in this unit today?\"</li><li>\"Which part of your mind is shouting the loudest right now—fear, or a need for peace?\"</li></ul>",
+            er: "<ul><li>\"When things happen this fast, it's difficult to process. Can we find a single point of focus together?\"</li><li>\"What was the last moment of 'normal' before you came through these trauma doors?\"</li></ul>",
+            hospice: "<ul><li>\"As the physical world recedes, what spiritual landscapes are becoming more vivid to you?\"</li><li>\"If this room could be filled with one comfort from home, what would it be?\"</li></ul>",
+            general: "<ul><li>\"How does being in this bed change the way you view your current purpose or role?\"</li><li>\"What is the biggest 'story' your mind has been telling you about your recovery?\"</li></ul>"
         };
 
-        // RE-EXPANDED HEART MATRIX (FOR WEIGHT INTEGRITY)
         const sitMatrix = {
-            intro: { 
-                q: "<ul><li>\"In the long story of your life, what specific chapter do you feel like we are walking through together today?\"</li><li>\"What is one part of your true identity that you hope we can protect and honor during your stay here?\"</li></ul>", 
-                p: "We open this space with profound reverence. May this clinical room become a sacred sanctuary where your story is heard and your presence is deeply honored. Amen.", 
-                ref: "Isaiah 43:2", 
-                text: "When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you." 
-            },
-            distress: { 
-                q: "<ul><li>\"Can you find a name or a color for the specific feeling that is shouting the loudest in your heart right now?\"</li><li>\"Where in your physical body do you feel this emotional distress most acutely—is it a weight in the chest or a knot?\"</li></ul>", 
-                p: "We speak absolute peace to your nervous system and stillness to your spirit. We ground ourselves in the truth that you are not alone in this dark valley. Amen.", 
-                ref: "Psalm 91:4", 
-                text: "He will cover you with his feathers, and under his wings you will find refuge." 
-            },
-            loss: { 
-                q: "<ul><li>\"What specific part of your own spirit feels like it may have departed alongside them in their passing?\"</li><li>\"Can we find a bridge of grace between the deep pain of this loss and the deep love of the memory?\"</li></ul>", 
-                p: "We honor the immense love that this grief represents. May the weight of your loss be eventually lightened by grace. Amen.", 
-                ref: "John 11:35", 
-                text: "Jesus wept. (The shortest and most profound validation of our sorrow.)" 
-            },
-            body: { 
-                q: "<ul><li>\"If your physical pain or somatic tension had a literal voice, what would it be shouting for in this moment?\"</li><li>\"If we gave this sensation a shape or a color, how would you describe it to me?\"</li></ul>", 
-                p: "God of all comfort, we invite Your calm into the bones and Your gentle release into the muscles. Heal the sacred connection between the spirit and the body. Amen.", 
-                ref: "Psalm 139:14", 
-                text: "I praise you because I am fearfully and wonderfully made; your works are wonderful." 
-            },
-            meaning: { 
-                q: "<ul><li>\"When you look back on your legacy, what is the 'red thread' or core value that has defined your entire life?\"</li><li>\"What gives you a sense of 'why' even when the 'how' of circumstances is failing?\"</li></ul>", 
-                p: "In the search for higher meaning, may we find the light that never fades. We thank You for the depth of the human spirit. Amen.", 
-                ref: "Jeremiah 29:11", 
-                text: "For I know the plans I have for you... plans to prosper you and not to harm you, plans to give you hope and a future." 
-            },
-            guilt: { 
-                q: "<ul><li>\"Can we find a way to separate who you ARE from what happened in that specific, difficult moment?\"</li><li>\"Is it possible for you to offer even a small amount of mercy to the version of yourself that existed then?\"</li></ul>", 
-                p: "We lay down the heavy burden of self-judgment today. We invite the grace that covers every scar and the mercy that begins new every morning. Amen.", 
-                ref: "Micah 7:18", 
-                text: "Who is a God like you... you do not stay angry forever but delight to show mercy." 
-            }
+            intro: { q: "<ul><li>\"What chapter do you feel like we are walking through together today?\"</li><li>\"What part of your identity should we protect while you are here?\"</li></ul>", p: "We open this space with profound reverence. May this clinical room become a sanctuary for your story. Amen.", ref: "Isaiah 43:2", text: "When you pass through the waters, I will be with you." },
+            distress: { q: "<ul><li>\"Can you name the feeling that is shouting the loudest in your heart right now?\"</li><li>\"Where in your body do you feel this distress most acutely?\"</li></ul>", p: "We speak absolute peace to your nervous system. You are safe. Amen.", ref: "Psalm 91:4", text: "He will cover you." },
+            loss: { q: "<ul><li>\"What part of your spirit feels like it departed alongside them?\"</li><li>\"Can we bridge the pain of loss and the love of memory?\"</li></ul>", p: "We honor the love that this grief represents. Amen.", ref: "John 11:35", text: "Jesus wept." },
+            body: { q: "<ul><li>\"If your pain had a literal voice, what would it be shouting for?\"</li><li>\"If we gave this sensation a color or shape, what would it look like?\"</li></ul>", p: "God of all comfort, heal the connection between the spirit and the body. Amen.", ref: "Psalm 139:14", text: "Fearfully made." },
+            meaning: { q: "<ul><li>\"What core value has defined your entire life's legacy?\"</li><li>\"What gives you a sense of 'why' even when the 'how' is failing?\"</li></ul>", p: "In the search for higher meaning, may we find the light. Amen.", ref: "Jeremiah 29:11", text: "Plans for hope." },
+            guilt: { q: "<ul><li>\"Can we separate who you ARE from what happened in that moment?\"</li><li>\"Is it possible to offer mercy to the version of yourself that existed then?\"</li></ul>", p: "We lay down the burden of self-judgment. Amen.", ref: "Micah 7:18", text: "Delight in mercy." }
         };
 
         document.getElementById('loc-questions').innerHTML = locMatrix[loc];
@@ -434,8 +295,6 @@
         document.getElementById('scripture-ref').innerText = res.ref;
         document.getElementById('scripture-content').innerText = res.text;
         document.getElementById('output').style.display = 'block';
-
-        // SYNC TRIGGER: Forces browser-based translation bars to re-scan
         window.dispatchEvent(new Event('resize'));
     }
 
@@ -446,6 +305,5 @@
         document.getElementById('bible-viewer').src = `https://www.biblegateway.com/passage/?search=${b}+${c}&version=${v}&interface=print`;
     }
 </script>
-
 </body>
 </html>
