@@ -1,6 +1,6 @@
 {
-  "name": "Full App Name",
-  "short_name": "App Name",
+  "name": "Shepherd Care",
+  "short_name": "Shepherd",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
